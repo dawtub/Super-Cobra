@@ -23,7 +23,6 @@ public class Spawner : MonoBehaviour
         {
             resetSpawn();
             whatToSpawn = Random.Range(1, 4);
-            Debug.Log(whatToSpawn);
             switch (whatToSpawn)
             {
                 case 1:

@@ -7,7 +7,6 @@ public class Rocket : MonoBehaviour
     Rigidbody2D rb;
     Vector2 moveVelocity;
     Vector2 moveInput;
-    float time;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +42,7 @@ public class Rocket : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            GameManager.KilledBy = "Rocket";
             DestroyRocket();
             FindObjectOfType<HeliCollision>().TangoDown();
         } else if (collision.gameObject.tag == "Obstacle")

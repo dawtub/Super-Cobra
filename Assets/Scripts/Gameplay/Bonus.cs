@@ -2,6 +2,8 @@
 
 public class Bonus : MonoBehaviour
 {
+    public static int BonusCounter = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class Bonus : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            BonusCounter++;
             Fuel.Refuel();
             Destroy(gameObject);
         } 

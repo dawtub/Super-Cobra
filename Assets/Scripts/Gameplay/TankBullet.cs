@@ -17,6 +17,7 @@ public class TankBullet : MonoBehaviour
         HeliCollision heli = hitInfo.GetComponent<HeliCollision>();
         if (heli != null)
         {
+            GameManager.KilledBy = "Tank";
             heli.TangoDown();
         }
         Destroy(gameObject);

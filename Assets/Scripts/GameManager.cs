@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverCanvas;
     public GameObject controllsCanvas;
     public GameObject score;
+    public static string KilledBy = "No information";
 
     bool gameHasEnded = false;
 
@@ -32,6 +35,14 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
+        Analytics.CustomEvent("GameOver", new Dictionary<string, object>
+        {
+            { "score", Score.ScoreValue },
+            { "fuel_level", Fuel.FuelLevel },
+            { "bonuses_taken", Bonus.BonusCounter },
+            { "killed_by", KilledBy }
+        });
+
         Fuel.ResetFuelLevel();
         Score.ScoreValue = 0;
         Destroy(gameObject);

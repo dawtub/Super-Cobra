@@ -34,10 +34,16 @@ public class UnityAds : MonoBehaviour
 
     void ShowAd()
     {
-        ShowAdCallbacks options = new ShowAdCallbacks();
-        options.finishCallback = HandleShowResult;
-        ShowAdPlacementContent ad = Monetization.GetPlacementContent(placementId) as ShowAdPlacementContent;
-        ad.Show(options);
+        if (0 == Random.Range(0, 3))
+        {
+            ShowAdCallbacks options = new ShowAdCallbacks();
+            options.finishCallback = HandleShowResult;
+            ShowAdPlacementContent ad = Monetization.GetPlacementContent(placementId) as ShowAdPlacementContent;
+            ad.Show(options);
+        } else
+        {
+            HandleShowResult(ShowResult.Finished);
+        }
     }
 
     void HandleShowResult(ShowResult result)
