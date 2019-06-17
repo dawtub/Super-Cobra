@@ -2,14 +2,17 @@
 
 public class TankBullet : MonoBehaviour
 {
-    public float speed = 30f;
-    public int damage = 40;
+    public float speed = 16f;
     public Rigidbody2D rb;
+    public Transform fakeTarget;
+
+    Vector2 moveDirection;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = -transform.right * speed;
+        moveDirection = (fakeTarget.position - transform.position).normalized * speed;
+        rb.velocity = new Vector2(moveDirection.x, moveDirection.y);
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
@@ -20,6 +23,11 @@ public class TankBullet : MonoBehaviour
             GameManager.KilledBy = "Tank";
             heli.TangoDown();
         }
+        Destroy(gameObject);
+    }
+
+    private void OnBecameInvisible()
+    {
         Destroy(gameObject);
     }
 }

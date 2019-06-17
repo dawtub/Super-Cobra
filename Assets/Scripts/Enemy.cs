@@ -5,14 +5,20 @@ public class Enemy : MonoBehaviour
     public int health = 100;
     public GameObject deathEffect;
     public float speed = 20f;
+    public float fireRate = 1.5f;
 
-    private void Start()
+    float nextFire;
+    Gun gun;
+
+    void Start()
     {
-
+        gun = GetComponent<Gun>();
+        nextFire = Time.time;
     }
 
     void Update()
     {
+        Shoot();
         handleMove();
     }
     
@@ -31,9 +37,22 @@ public class Enemy : MonoBehaviour
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-    
+
+    void Shoot()
+    {
+        if (Time.time > nextFire)
+        {
+            gun.Shoot();
+            nextFire = Time.time + fireRate;
+        }
+    }
+
     void handleMove()
     {
-        transform.Translate(Vector3.left * speed);
+        transform.Translate(Vector3.left * speed); 
+    }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 }
