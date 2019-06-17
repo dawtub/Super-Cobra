@@ -7,10 +7,16 @@ public class PauseMenu : MonoBehaviour, IMenu
     public static bool GameIsPaused = false;
     public GameObject pauseMenuCanvas;
 
+    Button pauseButton;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Button>().onClick.AddListener(Pause);
+        pauseButton = GetComponent<Button>();
+        if (pauseButton)
+        {
+            pauseButton.onClick.AddListener(Pause);
+        }
     }
 
     // Update is called once per frame
@@ -41,11 +47,14 @@ public class PauseMenu : MonoBehaviour, IMenu
 
     public void Menu()
     {
+        GameIsPaused = false;
+        FindObjectOfType<GameManager>().Quit();
         SceneManager.LoadScene(0);
     }
 
     public void Quit()
     {
+        FindObjectOfType<GameManager>().CollectInformation();
         Application.Quit();
     }
 }

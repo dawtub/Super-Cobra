@@ -35,14 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
-        Analytics.CustomEvent("GameOver", new Dictionary<string, object>
-        {
-            { "score", Score.ScoreValue },
-            { "fuel_level", Fuel.FuelLevel },
-            { "bonuses_taken", Bonus.BonusCounter },
-            { "killed_by", KilledBy }
-        });
-
+        CollectInformation();
         Fuel.ResetFuelLevel();
         Score.ScoreValue = 0;
         Destroy(gameObject);
@@ -57,5 +50,16 @@ public class GameManager : MonoBehaviour
     {
         controllsCanvas.SetActive(false);
         gameOverCanvas.SetActive(true);
+    }
+
+    public void CollectInformation()
+    {
+        Analytics.CustomEvent("GameOver", new Dictionary<string, object>
+        {
+            { "score", Score.ScoreValue },
+            { "fuel_level", Fuel.FuelLevel },
+            { "bonuses_taken", Bonus.BonusCounter },
+            { "killed_by", KilledBy }
+        });
     }
 }
