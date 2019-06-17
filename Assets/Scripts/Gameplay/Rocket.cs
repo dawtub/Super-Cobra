@@ -50,4 +50,8 @@ public class Rocket : MonoBehaviour
             DestroyRocket();
         }
     }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }

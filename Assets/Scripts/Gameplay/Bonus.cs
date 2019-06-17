@@ -13,7 +13,7 @@ public class Bonus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        handleMove();
+        transform.Translate(Vector3.left * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,8 +26,8 @@ public class Bonus : MonoBehaviour
         } 
     }
 
-    void handleMove()
+    private void OnBecameInvisible()
     {
-        transform.Translate(Vector3.left * Time.deltaTime);
+        Destroy(gameObject);
     }
 }
